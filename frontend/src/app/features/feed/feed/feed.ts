@@ -8,11 +8,12 @@ import { Upload } from '../../../core/services/upload';
 import { EmojiPicker } from '../../../shared/components/emoji-picker/emoji-picker';
 import { LanguageService } from '../../../core/services/language';
 import { Notifications } from '../../../layout/notifications/notifications';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [StatusList, PostCard, FormsModule, EmojiPicker, Notifications],
+  imports: [StatusList, PostCard, FormsModule, EmojiPicker, Notifications, RouterLink],
   templateUrl: './feed.html',
   styleUrl: './feed.scss',
 })

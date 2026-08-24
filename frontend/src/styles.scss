@@ -312,7 +312,7 @@ app-profile .remove-photo:hover { border-color: rgba(251,113,133,.4); background
   app-profile .profile-header img, app-profile .avatar { width: 72px !important; height: 72px !important; }
   app-profile .stats { width: 100%; justify-content: space-between; gap: 8px !important; }
   app-profile .profile-menu { position: absolute; top: 0; right: 0; }
-  app-profile .menu-popover { position: fixed; top: 72px; right: 12px; left: 12px; width: auto; }
+  app-profile .menu-popover { position: absolute; top: 48px; right: 0; left: auto; width: 225px; }
   app-feed app-notifications .notifications { position: absolute; top: 10px; right: 14px; }
   app-messages .messages-page { display: block; height: calc(100dvh - 68px - env(safe-area-inset-bottom)); min-height: 0; overflow: hidden; }
   app-messages .messages-page aside { width: 100%; height: 100%; display: block; overflow-y: auto; border-right: 0; }
@@ -541,6 +541,11 @@ html[dir='rtl'] app-messages .bubble.mine { margin-right: auto; margin-left: 0; 
   app-notifications .actor { min-width: 0; padding: 0 !important; overflow: visible; }
   app-notifications .actor>span:last-child { min-width: 0; overflow-wrap: anywhere; }
   app-notifications .request { margin: 10px 0 0 47px; flex-wrap: wrap; }
+  app-feed .mobile-header { position: sticky; z-index: 1200; top: 0; display: flex !important; justify-content: center !important; }
+  app-feed .mobile-header>strong { font-size: 16px; letter-spacing: -.35px; }
+  app-feed .mobile-user { position: absolute; left: 14px; width: 42px; height: 42px; display: grid; place-items: center; overflow: hidden; border: 2px solid #151824; border-radius: 50%; color: white; background: linear-gradient(135deg,#6366f1,#8b5cf6); box-shadow: 0 0 0 1px rgba(139,92,246,.65); text-decoration: none; font-size: 12px; font-weight: 700; }
+  app-feed .mobile-user img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  app-feed .mobile-header app-notifications .notifications { top: 10px; right: 14px; }
   app-messages form { align-items: center; }
   app-messages form input { min-width: 0; }
 }

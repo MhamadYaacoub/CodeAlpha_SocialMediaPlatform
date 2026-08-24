@@ -1,4 +1,5 @@
 <div class="feed">
+  <header class="mobile-header"><a routerLink="/profile" class="mobile-user" aria-label="Open profile">@if(user?.profileImage){<img [src]="user!.profileImage" alt="Your profile">}@else{<span>{{initial()}}</span>}</a><strong>Socially</strong><app-notifications /></header>
   <header class="feed-header"><div><h1>{{language.text('home')}}</h1><span>See what's happening today</span></div><app-notifications /></header>
   <section class="stories-section"><app-status-list /></section>
   <section class="composer" id="create-post">
