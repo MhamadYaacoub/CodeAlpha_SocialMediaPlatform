@@ -478,3 +478,54 @@ button:disabled::after,
   .file-fields label::after,
   .story-file-fields label::after { display: none; }
 }
+
+/* Language, attachment and RTL system */
+.language-switcher {
+  position: fixed; z-index: 2900; right: 72px; top: 18px; height: 42px;
+  padding: 0 10px; display: flex; align-items: center; gap: 7px;
+  border: 1px solid var(--stroke-strong); border-radius: 13px;
+  color: var(--ink-soft); background: rgba(17,19,28,.92); backdrop-filter: blur(18px);
+}
+.language-switcher select { border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 11px; cursor: pointer; }
+.language-switcher option { color: #111; background: white; }
+.composer-field { position: relative; min-width: 0; flex: 1; }
+app-feed .composer-field .composer-input { width: 100%; min-height: 88px; padding-right: 104px !important; }
+.composer-accessories,.story-input-actions { position: absolute; right: 10px; bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.attachment-button { width: 38px; height: 38px; padding: 0; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--stroke); border-radius: 11px; color: var(--ink-soft); background: rgba(255,255,255,.035); cursor: pointer; }
+.attachment-button input { display: none !important; }
+.attachment-button svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.current-avatar img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+.media-preview,.story-media-preview { position: relative; margin: 13px 0; overflow: hidden; border: 1px solid var(--stroke); border-radius: 15px; background: #07080c; }
+.media-preview img,.media-preview video,.story-media-preview img,.story-media-preview video { width: 100%; max-height: 360px; display: block; object-fit: contain; }
+.media-preview>button,.story-media-preview>button { position: absolute; top: 9px; right: 9px; width: 34px; height: 34px; padding: 0; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; color: white; background: rgba(5,6,9,.72); }
+app-status-list .story-file-fields, app-status-list .story-attachment-ready { display: none !important; }
+app-status-list .caption-editor { position: relative; min-height: 150px; }
+app-status-list .caption-editor textarea { padding-right: 100px !important; }
+
+html[dir='rtl'] body { direction: rtl; }
+html[dir='rtl'] .identity,html[dir='rtl'] .person-info,html[dir='rtl'] .account-info,html[dir='rtl'] .info { text-align: right; }
+html[dir='rtl'] app-sidebar .navigation a,html[dir='rtl'] app-sidebar .settings { flex-direction: row; }
+html[dir='rtl'] app-sidebar .notification { margin-right: auto; margin-left: 0; }
+html[dir='rtl'] .composer-accessories,html[dir='rtl'] .story-input-actions { right: auto; left: 10px; }
+html[dir='rtl'] app-feed .composer-field .composer-input,html[dir='rtl'] app-status-list .caption-editor textarea { padding-right: 15px !important; padding-left: 104px !important; text-align: right; }
+html[dir='rtl'] app-messages .bubble.mine { margin-right: auto; margin-left: 0; }
+
+@media(max-width:760px){
+  .language-switcher { top: 12px; right: 66px; height: 42px; padding: 0 8px; }
+  .language-switcher span { display: none; }
+  .language-switcher select { max-width: 72px; }
+  app-notifications .panel {
+    position: fixed !important; inset: 64px 10px auto 10px !important;
+    width: calc(100vw - 20px) !important; max-width: none !important;
+    max-height: calc(100dvh - 148px) !important; overflow: hidden !important;
+    transform: none !important;
+  }
+  app-notifications .panel header { min-height: 58px; padding: 12px 14px !important; align-items: center; }
+  app-notifications .panel .list { max-height: calc(100dvh - 210px) !important; overflow-x: hidden; }
+  app-notifications .panel article { min-width: 0; padding: 13px !important; }
+  app-notifications .actor { min-width: 0; padding: 0 !important; overflow: visible; }
+  app-notifications .actor>span:last-child { min-width: 0; overflow-wrap: anywhere; }
+  app-notifications .request { margin: 10px 0 0 47px; flex-wrap: wrap; }
+  app-messages form { align-items: center; }
+  app-messages form input { min-width: 0; }
+}

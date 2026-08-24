@@ -1,28 +1,11 @@
 <section class="messages-page" [class.chat-open]="mobileChatOpen()">
-  <aside>
-    <header><h1>Messages</h1></header>
-    @for(item of conversations();track item.id){
-      <button class="conversation" [class.selected]="selected()?.id===item.id" (click)="select(item)">
-        <span class="avatar">@if(other(item)?.profileImage){<img [src]="other(item).profileImage" [alt]="other(item).name">}@else{{{other(item)?.name?.[0]||'U'}}}</span>
-        <span><strong>{{other(item)?.name||'Conversation'}}</strong><small>{{item.messages[0]?.content||'Start chatting'}}</small></span>
-        @if(item.unreadCount>0){<b class="unread">{{item.unreadCount}}</b>}
-      </button>
-    }
+  <aside><header><h1>Messages</h1></header>
+    @for(item of conversations();track item.id){<button class="conversation" [class.selected]="selected()?.id===item.id" (click)="select(item)"><span class="avatar">@if(other(item)?.profileImage){<img [src]="other(item).profileImage" [alt]="other(item).name">}@else{{{other(item)?.name?.[0]||'U'}}}</span><span><strong>{{other(item)?.name||'Conversation'}}</strong><small>{{item.messages[0]?.content||'Start chatting'}}</small></span>@if(item.unreadCount>0){<b class="unread">{{item.unreadCount}}</b>}</button>}
     @if(!loading()&&conversations().length===0){<p class="empty">No mutual followers available yet.</p>}
   </aside>
-  <main>
-    @if(selected()){
-      <header class="chat-header">
-        <button class="mobile-back" type="button" (click)="backToList()" aria-label="Back to messages">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-        </button>
-        <div class="chat-person">
-          <span class="chat-avatar">@if(other(selected()!)?.profileImage){<img [src]="other(selected()!).profileImage" [alt]="other(selected()!).name">}@else{{{other(selected()!)?.name?.[0]||'U'}}}</span>
-          <strong>{{other(selected()!)?.name||'Conversation'}}</strong>
-        </div>
-      </header>
-      <div class="thread">@for(item of messages();track item.id){<div class="bubble" [class.mine]="item.senderId===currentUser?.id"><small>{{item.sender?.name}}</small><p>{{item.content}}</p></div>}</div>
-      <form (ngSubmit)="send()"><input name="draft" [(ngModel)]="draft" maxlength="2000" placeholder="Write a message…"><button [disabled]="sending()">{{sending()?'Sending…':'Send'}}</button></form>
-    }@else{<div class="empty center">Select a conversation to begin.</div>}
-  </main>
+  <main>@if(selected()){
+    <header class="chat-header"><button class="mobile-back" type="button" (click)="backToList()" aria-label="Back to messages"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div class="chat-person"><span class="chat-avatar">@if(other(selected()!)?.profileImage){<img [src]="other(selected()!).profileImage" [alt]="other(selected()!).name">}@else{{{other(selected()!)?.name?.[0]||'U'}}}</span><strong>{{other(selected()!)?.name||'Conversation'}}</strong></div></header>
+    <div class="thread">@for(item of messages();track item.id){<div class="bubble" [class.mine]="item.senderId===currentUser?.id"><small>{{item.sender?.name}}</small><p translate="no">{{item.content}}</p></div>}</div>
+    <form (ngSubmit)="send()"><input name="draft" [(ngModel)]="draft" maxlength="2000" placeholder="Write a message…" translate="no"><app-emoji-picker (selected)="addEmoji($event)" /><button [disabled]="sending()">{{sending()?'Sending…':'Send'}}</button></form>
+  }@else{<div class="empty center">Select a conversation to begin.</div>}</main>
 </section>

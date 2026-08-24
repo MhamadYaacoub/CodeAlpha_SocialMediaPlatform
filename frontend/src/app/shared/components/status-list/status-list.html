@@ -43,18 +43,20 @@
     <div class="story-modal" (click)="$event.stopPropagation()">
       <header class="modal-header">
         <div>
-          <span class="modal-eyebrow">New story</span>
+          <span class="modal-eyebrow">{{language.text('newStory')}}</span>
           <h3>Share a moment</h3>
         </div>
         <button type="button" class="close-button" aria-label="Close" (click)="closeCreateModal()">×</button>
       </header>
 
-      <div class="story-preview">
+      <div class="story-preview caption-editor">
         <textarea
           [(ngModel)]="newStatusContent"
           maxlength="300"
-          placeholder="What's happening?"
+          [placeholder]="language.text('what')"
+          translate="no"
         ></textarea>
+        <div class="story-input-actions"><label class="attachment-button" aria-label="Attach photo or video"><svg viewBox="0 0 24 24"><path d="M21.4 11.6 12 21a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg><input type="file" accept="image/*,video/*" (change)="uploadMedia($event)"></label><app-emoji-picker (selected)="addEmoji($event)" /></div>
         <div class="character-count">{{ newStatusContent.length }}/300</div>
       </div>
 
@@ -74,7 +76,7 @@
         @if (uploading()) { <span>Uploading...</span> }
       </div>
       @if (newMediaUrl) {
-        <div class="story-attachment-ready">{{ newMediaType === 'video' ? 'Video' : 'Photo' }} ready</div>
+        <div class="story-media-preview">@if(newMediaType==='video'){<video [src]="newMediaUrl" controls playsinline></video>}@else{<img [src]="newMediaUrl" alt="Selected story attachment">}<button type="button" (click)="removeMedia()" aria-label="Remove attachment">×</button></div>
       }
       @if (newMusicUrl) {
         <div class="story-attachment-ready">♫ {{ newMusicTitle }} ready</div>
@@ -92,7 +94,7 @@
           [disabled]="creating() || uploading()"
           (click)="createStatus()"
         >
-          {{ creating() ? 'Sharing...' : 'Share story' }}
+          {{ creating() ? 'Sharing...' : language.text('shareStory') }}
         </button>
       </footer>
     </div>

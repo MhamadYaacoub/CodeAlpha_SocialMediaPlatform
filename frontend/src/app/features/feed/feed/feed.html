@@ -1,23 +1,26 @@
 <div class="feed">
-  <header class="feed-header"><div><h1>Home</h1><span>See what's happening today</span></div></header>
+  <header class="feed-header"><div><h1>{{language.text('home')}}</h1><span>See what's happening today</span></div></header>
   <section class="stories-section"><app-status-list /></section>
   <section class="composer" id="create-post">
-    <div class="composer-top"><div class="current-avatar">{{ initial() }}</div><textarea class="composer-input" [(ngModel)]="postContent" maxlength="2000" placeholder="What's happening?"></textarea></div>
-    <div class="file-fields">
-      <label>📷 Open camera<input type="file" accept="image/*,video/*" capture="environment" (change)="uploadMedia($event)"></label>
-      <label>🖼 Gallery<input type="file" accept="image/*,video/*" (change)="uploadMedia($event)"></label>
-      <label>♫ Music<input type="file" accept="audio/*" (change)="uploadMusic($event)"></label>
-      @if (uploading()) { <span>Uploading...</span> }
+    <div class="composer-top">
+      <div class="current-avatar">@if(user?.profileImage){<img [src]="user!.profileImage" alt="Your profile">}@else{{{initial()}}}</div>
+      <div class="composer-field">
+        <textarea class="composer-input" [(ngModel)]="postContent" maxlength="2000" [placeholder]="language.text('what')" translate="no"></textarea>
+        <div class="composer-accessories">
+          <label class="attachment-button" aria-label="Attach photo or video"><svg viewBox="0 0 24 24"><path d="M21.4 11.6 12 21a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg><input type="file" accept="image/*,video/*" (change)="uploadMedia($event)"></label>
+          <app-emoji-picker (selected)="addEmoji($event)" />
+        </div>
+      </div>
     </div>
-    @if (mediaUrl) { <div class="attachment-ready">{{ mediaType === 'video' ? 'Video' : 'Photo' }} ready</div> }
-    @if (musicUrl) { <div class="attachment-ready">♫ {{ musicTitle }} ready</div> }
-    @if (error()) { <p class="form-error">{{ error() }}</p> }
-    <div class="composer-bottom"><span>{{ postContent.length }}/2000</span><button class="post-button" (click)="createPost()" [disabled]="posting()||uploading()">{{ posting() ? 'Posting…' : 'Post' }}</button></div>
+    @if(mediaUrl){<div class="media-preview">@if(mediaType==='video'){<video [src]="mediaUrl" controls playsinline></video>}@else{<img [src]="mediaUrl" alt="Selected attachment">}<button type="button" (click)="removeMedia()" aria-label="Remove attachment">×</button></div>}
+    @if(uploading()){<div class="attachment-ready">Uploading attachment…</div>}
+    @if(error()){<p class="form-error">{{error()}}</p>}
+    <div class="composer-bottom"><span>{{postContent.length}}/2000</span><button class="post-button" (click)="createPost()" [disabled]="posting()||uploading()">{{posting()?'Posting…':language.text('post')}}</button></div>
   </section>
-  <div class="feed-filter"><button class="active">Latest posts</button></div>
+  <div class="feed-filter"><button class="active">{{language.text('latest')}}</button></div>
   <section class="posts">
-    @if (loading()) { <p class="state">Loading posts…</p> }
-    @for (post of posts(); track post.id) { <app-post-card [post]="post" (changed)="loadPosts()" /> }
-    @if (!loading() && posts().length === 0) { <p class="state">No posts yet. Share the first one.</p> }
+    @if(loading()){<p class="state">Loading posts…</p>}
+    @for(post of posts();track post.id){<app-post-card [post]="post" (changed)="loadPosts()" />}
+    @if(!loading()&&posts().length===0){<p class="state">No posts yet. Share the first one.</p>}
   </section>
 </div>

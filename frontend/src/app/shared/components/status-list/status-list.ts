@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Status, StatusItem } from '../../../core/services/status';
 import { Auth } from '../../../core/services/auth';
 import { Upload } from '../../../core/services/upload';
+import { EmojiPicker } from '../emoji-picker/emoji-picker';
+import { LanguageService } from '../../../core/services/language';
 
 @Component({
   selector: 'app-status-list',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, EmojiPicker],
   templateUrl: './status-list.html',
   styleUrl: './status-list.scss',
 })
@@ -32,7 +34,7 @@ export class StatusList implements OnInit {
   newStatusContent = '';
   newMediaUrl='';newMediaType:'image'|'video'='image';newMusicUrl='';newMusicTitle='';
 
-  constructor(private statusService: Status, private auth: Auth,private upload:Upload) {}
+  constructor(private statusService: Status, private auth: Auth,private upload:Upload,public language:LanguageService) {}
 
   ngOnInit(): void {
     this.loadStatuses();
@@ -200,4 +202,6 @@ export class StatusList implements OnInit {
   openOwnStory():void{const status=this.ownStatus();if(status)this.openStatus(status);else this.openCreateModal();}
   uploadMedia(event:Event):void{const file=(event.target as HTMLInputElement).files?.[0];if(!file)return;this.uploading.set(true);this.upload.file(file).subscribe({next:({url,mime})=>{this.newMediaUrl=url;this.newMediaType=mime.startsWith('video/')?'video':'image';this.uploading.set(false);},error:()=>{this.createError.set('Media upload failed.');this.uploading.set(false);}});}
   uploadMusic(event:Event):void{const file=(event.target as HTMLInputElement).files?.[0];if(!file)return;this.uploading.set(true);this.upload.file(file).subscribe({next:({url})=>{this.newMusicUrl=url;this.newMusicTitle=file.name;this.uploading.set(false);},error:()=>{this.createError.set('Music upload failed.');this.uploading.set(false);}});}
+  addEmoji(emoji:string):void{this.newStatusContent+=emoji;}
+  removeMedia():void{this.newMediaUrl='';}
 }

@@ -5,11 +5,12 @@ import { Post, PostItem, CommentItem } from '../../../core/services/post';
 import { Auth } from '../../../core/services/auth';
 import { User } from '../../../core/services/user';
 import { Router } from '@angular/router';
+import { EmojiPicker } from '../emoji-picker/emoji-picker';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [FormsModule, DatePipe],
+  imports: [FormsModule, DatePipe, EmojiPicker],
   templateUrl: './post-card.html',
   styleUrl: './post-card.scss',
 })
@@ -31,4 +32,5 @@ export class PostCard {
   mediaLike():void{if(!this.post.liked)this.toggleLike();this.heart.set(true);setTimeout(()=>this.heart.set(false),700);}
   follow():void{if(this.followBusy())return;this.followBusy.set(true);this.users.toggleFollow(this.post.userId).subscribe({next:(result:any)=>{this.post.user.following=result.following;this.post.user.requestStatus=result.requestStatus;this.followBusy.set(false);},error:()=>this.followBusy.set(false)});}
   openProfile():void{this.router.navigate(['/profile',this.post.userId]);}
+  addEmoji(emoji:string):void{this.comment+=emoji;}
 }

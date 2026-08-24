@@ -1,0 +1,1 @@
+<div class="emoji-control"><button type="button" class="emoji-trigger" (click)="open.update(value=>!value)" aria-label="Choose emoji" [attr.aria-expanded]="open()">☺</button>@if(open()){<div class="emoji-panel">@for(emoji of emojis;track emoji){<button type="button" (click)="choose(emoji)">{{emoji}}</button>}</div>}</div>

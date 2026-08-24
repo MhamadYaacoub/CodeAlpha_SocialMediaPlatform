@@ -4,6 +4,7 @@ import { Sidebar } from '../sidebar/sidebar';
 import { MobileNav } from '../mobile-nav/mobile-nav';
 import { RightSidebar } from '../right-sidebar/right-sidebar';
 import { Notifications } from '../notifications/notifications';
+import { AppLanguage, LanguageService } from '../../core/services/language';
 
 @Component({
   selector: 'app-app-layout',
@@ -12,4 +13,7 @@ import { Notifications } from '../notifications/notifications';
   templateUrl: './app-layout.html',
   styleUrl: './app-layout.scss',
 })
-export class AppLayout {}
+export class AppLayout {
+  constructor(public language:LanguageService){}
+  changeLanguage(event:Event):void{this.language.setLanguage((event.target as HTMLSelectElement).value as AppLanguage);}
+}
