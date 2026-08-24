@@ -1,0 +1,173 @@
+<div class="statuses">
+  <button class="status-item add-status" type="button" (click)="openOwnStory()">
+    <div class="status-ring own" [class.viewed]="ownStatus()?.viewed">
+      <div class="avatar">
+        @if (ownStatus()?.user?.profileImage; as ownImage) {
+          <img [src]="ownImage" alt="Your story">
+        } @else {
+          Me
+        }
+        <span class="add-icon" (click)="openCreateModal(); $event.stopPropagation()">+</span>
+      </div>
+    </div>
+    <span>Your story</span>
+  </button>
+
+  @if (loading()) {
+    @for (item of [1, 2, 3, 4]; track item) {
+      <div class="status-skeleton">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-name"></div>
+      </div>
+    }
+  } @else {
+    @for (status of otherStatuses(); track status.id) {
+      <button class="status-item" type="button" (click)="openStatus(status)">
+        <div class="status-ring" [class.viewed]="status.viewed">
+          <div class="avatar">
+            @if (status.user?.profileImage; as profileImage) {
+              <img [src]="profileImage" [alt]="getName(status)">
+            } @else {
+              {{ getInitial(status) }}
+            }
+          </div>
+        </div>
+        <span>{{ getName(status) }}</span>
+      </button>
+    }
+  }
+</div>
+
+@if (showCreateModal()) {
+  <div class="modal-backdrop" (click)="closeCreateModal()">
+    <div class="story-modal" (click)="$event.stopPropagation()">
+      <header class="modal-header">
+        <div>
+          <span class="modal-eyebrow">New story</span>
+          <h3>Share a moment</h3>
+        </div>
+        <button type="button" class="close-button" aria-label="Close" (click)="closeCreateModal()">×</button>
+      </header>
+
+      <div class="story-preview">
+        <textarea
+          [(ngModel)]="newStatusContent"
+          maxlength="300"
+          placeholder="What's happening?"
+        ></textarea>
+        <div class="character-count">{{ newStatusContent.length }}/300</div>
+      </div>
+
+      <div class="story-file-fields">
+        <label>
+          📷 Open camera
+          <input type="file" accept="image/*,video/*" capture="environment" (change)="uploadMedia($event)">
+        </label>
+        <label>
+          🖼 Gallery
+          <input type="file" accept="image/*,video/*" (change)="uploadMedia($event)">
+        </label>
+        <label>
+          ♫ Music
+          <input type="file" accept="audio/*" (change)="uploadMusic($event)">
+        </label>
+        @if (uploading()) { <span>Uploading...</span> }
+      </div>
+      @if (newMediaUrl) {
+        <div class="story-attachment-ready">{{ newMediaType === 'video' ? 'Video' : 'Photo' }} ready</div>
+      }
+      @if (newMusicUrl) {
+        <div class="story-attachment-ready">♫ {{ newMusicTitle }} ready</div>
+      }
+
+      @if (createError()) {
+        <div class="create-error">{{ createError() }}</div>
+      }
+
+      <footer class="modal-footer">
+        <div class="story-info"><span>◷</span> Disappears after 24 hours</div>
+        <button
+          class="share-button"
+          type="button"
+          [disabled]="creating() || uploading()"
+          (click)="createStatus()"
+        >
+          {{ creating() ? 'Sharing...' : 'Share story' }}
+        </button>
+      </footer>
+    </div>
+  </div>
+}
+
+@if (showViewer() && selectedStatus(); as story) {
+  <div class="viewer-backdrop" (click)="closeViewer()">
+    <div class="story-viewer" (click)="$event.stopPropagation()">
+      <div class="story-progress"><span></span></div>
+
+      <header class="story-header">
+        <div class="story-owner">
+          <div class="story-owner-avatar">@if(story.user?.profileImage; as storyImage){<img [src]="storyImage" [alt]="getName(story)">}@else{{{ getInitial(story) }}}</div>
+          <div>
+            <strong>{{ getName(story) }}</strong>
+            <span>{{ getTimeAgo(story.createdAt) }}</span>
+          </div>
+        </div>
+        <div class="story-actions">
+          @if (isMyStatus(story)) {
+            <button class="delete-story" type="button" (click)="deleteSelectedStatus()">Delete</button>
+          }
+          <button class="close-story" type="button" aria-label="Close" (click)="closeViewer()">×</button>
+        </div>
+      </header>
+
+      <div class="story-content">
+        @if ((story.mediaUrl || story.imageUrl) && story.mediaType !== 'video') {
+          <img [src]="story.mediaUrl || story.imageUrl" alt="Story media">
+        }
+        @if (story.mediaUrl && story.mediaType === 'video') {
+          <video [src]="story.mediaUrl" controls autoplay playsinline></video>
+        }
+        @if (story.content) { <p>{{ story.content }}</p> }
+      </div>
+
+      @if (story.musicUrl) {
+        <div class="story-music">
+          <span>♫ {{ story.musicTitle || 'Music' }}</span>
+          <audio [src]="story.musicUrl" controls autoplay></audio>
+        </div>
+      }
+
+      <footer class="story-footer">
+        <div class="story-expiration">Disappears after 24 hours</div>
+        @if (isMyStatus(story)) {
+          <button type="button" class="views-button" (click)="loadViewers()">
+            {{ viewsCount() }} views
+          </button>
+        }
+      </footer>
+
+      @if (viewersLoading()) {
+        <div class="viewer-loading">Loading viewers...</div>
+      }
+
+      @if (isMyStatus(story) && viewers().length > 0) {
+        <div class="viewer-list">
+          <h4>Viewed by</h4>
+          @for (view of viewers(); track view.id) {
+            <div class="viewer-person">
+              <div class="viewer-avatar">@if(view.viewer?.profileImage; as viewerImage){<img [src]="viewerImage" [alt]="view.viewer?.name || 'Viewer'">}@else{{{ view.viewer?.name?.charAt(0) || view.viewer?.username?.charAt(0) || '?' }}}</div>
+              <div>
+                <strong>{{ view.viewer?.name || view.viewer?.username || 'User' }}</strong>
+                <span>@{{ view.viewer?.username }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      @if (isMyStatus(story) && !viewersLoading() && viewsCount() === 0) {
+        <div class="no-viewers">No one has viewed this story yet.</div>
+      }
+    </div>
+  </div>
+}

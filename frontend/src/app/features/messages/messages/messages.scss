@@ -1,0 +1,34 @@
+.messages-page{min-height:100vh;display:grid;grid-template-columns:220px 1fr;color:#f7f7f8}
+aside{border-right:1px solid rgba(255,255,255,.07)}
+header{padding:20px;border-bottom:1px solid rgba(255,255,255,.07)}
+h1{margin:0;font-size:18px}
+.conversation{width:100%;padding:13px;display:flex;align-items:center;gap:10px;border:0;border-bottom:1px solid rgba(255,255,255,.05);color:white;background:transparent;text-align:left;cursor:pointer}
+.conversation.selected{background:rgba(139,92,246,.1)}
+.avatar{width:36px;height:36px;display:grid;place-items:center;overflow:hidden;border-radius:50%;background:#7c3aed}
+.avatar img{width:100%;height:100%;display:block;object-fit:cover}
+.conversation>span:nth-child(2){min-width:0;display:flex;flex:1;flex-direction:column}
+.conversation small{margin-top:3px;overflow:hidden;color:#777b86;text-overflow:ellipsis;white-space:nowrap}
+.unread{min-width:19px;height:19px;display:grid;place-items:center;border-radius:10px;color:white;background:#ef4444;font-size:8px}
+.messages-page main{min-width:0;display:flex;flex-direction:column;height:100vh}
+.thread{flex:1;padding:18px;overflow-y:auto}
+.bubble{width:fit-content;max-width:80%;margin:8px 0;padding:9px 12px;border-radius:12px;background:#171920}
+.bubble.mine{margin-left:auto;background:#6d28d9}
+.bubble small{font-size:8px;opacity:.7}
+.bubble p{margin:3px 0;font-size:11px}
+.messages-page form{padding:15px;display:flex;gap:8px;border-top:1px solid rgba(255,255,255,.07)}
+form input{flex:1;padding:11px;border:1px solid rgba(255,255,255,.08);border-radius:10px;color:white;background:#101218;outline:none}
+form button{padding:10px 15px;border:0;border-radius:9px;color:white;background:#7c3aed}
+.empty{padding:20px;color:#777b86;font-size:11px}
+.center{margin:auto}
+
+@media(max-width:900px){
+  .messages-page{display:block!important;height:calc(100dvh - 68px - env(safe-area-inset-bottom));min-height:0;overflow:hidden}
+  .messages-page>aside{width:100%!important;height:100%;display:block!important;overflow-y:auto;border-right:0}
+  .messages-page>main{width:100%!important;height:100%;display:none!important}
+  .messages-page.chat-open>aside{display:none!important}
+  .messages-page.chat-open>main{display:flex!important}
+  .conversation{min-height:74px;padding:12px 17px}
+  .conversation .avatar{width:48px;height:48px;flex:none}
+  .conversation small{display:block}
+  .thread{padding:15px}
+}

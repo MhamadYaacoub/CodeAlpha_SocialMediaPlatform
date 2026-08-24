@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #06070a;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ================================================================
+   SOCIALLY DESIGN SYSTEM — OBSIDIAN AURORA
+================================================================ */
+:root {
+  color-scheme: dark;
+  --canvas: #050609;
+  --canvas-raised: #090b11;
+  --panel: rgba(14, 16, 24, 0.78);
+  --panel-solid: #0e1018;
+  --panel-hover: #151824;
+  --stroke: rgba(255, 255, 255, 0.075);
+  --stroke-strong: rgba(255, 255, 255, 0.14);
+  --ink: #f7f7fb;
+  --ink-soft: #a8abba;
+  --ink-muted: #696e7e;
+  --violet: #8b5cf6;
+  --violet-bright: #a78bfa;
+  --cyan: #36d1dc;
+  --pink: #f472b6;
+  --danger: #fb7185;
+  --success: #4ade80;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  position: relative;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% -10%, rgba(139, 92, 246, 0.16), transparent 32rem),
+    radial-gradient(circle at 100% 35%, rgba(54, 209, 220, 0.08), transparent 30rem),
+    var(--canvas) !important;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  content: '';
+  background-image: radial-gradient(rgba(255,255,255,.16) .6px, transparent .6px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+
+::selection { color: white; background: rgba(139, 92, 246, 0.55); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: 10px; background: #2b2e3a; background-clip: padding-box; }
+
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--violet-bright) !important;
+  outline-offset: 3px;
+}
+
+button, a { transition: transform .2s ease, color .2s ease, background .2s ease, border-color .2s ease, opacity .2s ease, box-shadow .2s ease; }
+button:active, a:active { transform: scale(.97); }
+
+/* Shell */
+app-app-layout .app-shell {
+  grid-template-columns: 252px minmax(0, 680px) 332px !important;
+  gap: 0;
+  max-width: 1280px;
+  margin: 0 auto;
+  background: transparent !important;
+}
+app-app-layout .left-column,
+app-app-layout .main-content,
+app-app-layout .right-column { border-color: var(--stroke) !important; }
+app-app-layout .main-content { background: rgba(6, 7, 11, .7); backdrop-filter: blur(24px); }
+
+/* Desktop navigation */
+app-sidebar .sidebar { padding: 30px 18px 22px !important; background: rgba(7, 8, 13, .82) !important; backdrop-filter: blur(28px); }
+app-sidebar .brand { gap: 13px !important; letter-spacing: -.7px; }
+app-sidebar .brand-icon {
+  width: 40px !important; height: 40px !important; border-radius: 14px !important;
+  background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 44%, #ec4899 100%) !important;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, .36), inset 0 1px rgba(255,255,255,.25) !important;
+}
+app-sidebar .navigation { gap: 7px !important; margin-top: 44px !important; }
+app-sidebar .navigation a, app-sidebar .settings {
+  min-height: 48px; padding: 0 15px !important; border: 1px solid transparent !important;
+  border-radius: 14px !important; font-size: 13px !important;
+}
+app-sidebar .navigation a:hover, app-sidebar .settings:hover { border-color: var(--stroke) !important; background: rgba(255,255,255,.035) !important; transform: translateX(3px); }
+app-sidebar .navigation a.active { border-color: rgba(139,92,246,.2) !important; background: linear-gradient(90deg, rgba(139,92,246,.16), rgba(139,92,246,.035)) !important; box-shadow: inset 3px 0 var(--violet); }
+app-sidebar .create-button { padding: 14px !important; border-radius: 14px !important; background: linear-gradient(135deg, #8b5cf6, #6d28d9 55%, #4f46e5) !important; box-shadow: 0 16px 36px rgba(109,40,217,.28) !important; }
+app-sidebar .create-button:hover { transform: translateY(-2px); box-shadow: 0 20px 45px rgba(109,40,217,.42) !important; }
+app-sidebar .account { padding: 16px 8px 0 !important; }
+app-sidebar .account .avatar { overflow: hidden; }
+app-sidebar .account .avatar img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+
+/* Feed */
+app-feed .feed { background: transparent !important; }
+app-feed .feed-header { height: 86px !important; padding: 0 28px !important; background: rgba(7,8,12,.58); backdrop-filter: blur(22px); }
+app-feed .feed-header h1 { font-size: 21px !important; letter-spacing: -.6px; }
+app-feed .stories-section { padding: 22px 24px !important; }
+app-feed .composer {
+  margin: 20px 22px 4px !important; padding: 19px !important;
+  border-color: var(--stroke) !important; border-radius: 20px !important;
+  background: linear-gradient(145deg, rgba(18,20,29,.92), rgba(10,12,18,.94)) !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.025);
+}
+app-feed .composer:focus-within { border-color: rgba(139,92,246,.34) !important; box-shadow: 0 18px 60px rgba(0,0,0,.24), 0 0 0 4px rgba(139,92,246,.055); }
+app-feed .composer-input { padding: 13px 15px !important; border-radius: 14px !important; color: var(--ink) !important; background: rgba(255,255,255,.025) !important; resize: vertical; }
+app-feed .file-fields label { border-color: var(--stroke) !important; border-radius: 10px !important; background: rgba(255,255,255,.035) !important; }
+app-feed .file-fields label:hover { color: white; border-color: rgba(139,92,246,.3) !important; background: rgba(139,92,246,.09) !important; transform: translateY(-1px); }
+app-feed .post-button { min-width: 82px; padding: 10px 19px !important; border-radius: 11px !important; box-shadow: 0 9px 25px rgba(109,40,217,.25); }
+app-feed .feed-filter { height: 62px !important; margin-top: 8px !important; padding: 0 24px !important; }
+
+/* Stories */
+app-status-list .statuses { gap: 19px !important; padding: 2px; }
+app-status-list .status-item { width: 62px !important; gap: 9px !important; font-size: 10px !important; }
+app-status-list .status-ring { width: 58px !important; height: 58px !important; padding: 2px !important; box-shadow: 0 6px 20px rgba(139,92,246,.16); }
+app-status-list .status-ring:not(.viewed) { animation: ringGlow 3s ease-in-out infinite; }
+app-status-list .avatar { width: 52px !important; height: 52px !important; background: #171a24 !important; }
+app-status-list .status-ring { min-width: 58px !important; max-width: 58px !important; min-height: 58px !important; max-height: 58px !important; aspect-ratio: 1; }
+app-status-list .avatar { position: relative; min-width: 52px !important; max-width: 52px !important; min-height: 52px !important; max-height: 52px !important; aspect-ratio: 1; }
+app-status-list .avatar img { position: absolute; inset: 0; width: 100% !important; height: 100% !important; border-radius: 50% !important; object-fit: cover !important; }
+app-status-list .story-modal, app-status-list .story-viewer { border-color: var(--stroke-strong) !important; border-radius: 26px !important; box-shadow: 0 40px 120px rgba(0,0,0,.72) !important; }
+app-status-list .story-preview { background: radial-gradient(circle at 20% 15%, rgba(244,114,182,.42), transparent 36%), radial-gradient(circle at 90% 90%, rgba(54,209,220,.28), transparent 40%), linear-gradient(145deg,#221230,#101a2b) !important; }
+@keyframes ringGlow { 50% { filter: brightness(1.18); box-shadow: 0 8px 28px rgba(139,92,246,.28); } }
+
+/* Posts */
+app-post-card .post-card {
+  margin: 18px 22px !important; padding: 20px !important;
+  border-color: var(--stroke) !important; border-radius: 21px !important;
+  background: linear-gradient(150deg, rgba(16,18,27,.92), rgba(10,12,18,.95)) !important;
+  box-shadow: 0 16px 55px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.025);
+}
+app-post-card .post-card:hover { border-color: rgba(255,255,255,.115) !important; box-shadow: 0 22px 70px rgba(0,0,0,.25); transform: translateY(-1px); }
+app-post-card .avatar { width: 43px !important; height: 43px !important; box-shadow: 0 6px 18px rgba(99,102,241,.22); }
+app-post-card .content { margin: 17px 0 !important; font-size: 13px !important; line-height: 1.7 !important; }
+app-post-card .post-image { max-height: 600px !important; border: 1px solid rgba(255,255,255,.06); border-radius: 17px !important; background: #050609; }
+app-post-card .actions { gap: 8px !important; margin-top: 15px !important; padding-top: 14px !important; }
+app-post-card .actions button { border: 1px solid transparent; background: transparent !important; }
+app-post-card .actions button:hover { color: white; border-color: var(--stroke); background: rgba(255,255,255,.035) !important; }
+app-post-card .actions button.liked { color: #fb7185 !important; border-color: rgba(251,113,133,.18); background: rgba(244,63,94,.055) !important; }
+app-post-card .actions button.saving-like { opacity: .72 !important; cursor: wait !important; }
+app-post-card .like-error { margin: 7px 0 0; color: #fb7185; font-size: 9px; }
+app-post-card .follow { padding: 8px 14px !important; border: 1px solid rgba(139,92,246,.25) !important; border-radius: 10px !important; }
+app-post-card .comments input { height: 42px; padding: 0 13px !important; border-radius: 12px !important; }
+
+/* Explore and profile */
+app-explore .page, app-profile .page { padding: 29px !important; }
+app-explore header h1, app-profile .identity h1 { letter-spacing: -.55px; }
+app-explore .search { margin: 26px 0 !important; }
+app-explore .search input { height: 48px; padding: 0 16px !important; border-radius: 14px !important; background: rgba(16,18,25,.9) !important; }
+app-explore .people { gap: 12px !important; }
+app-explore .people article { padding: 17px !important; border-radius: 17px !important; background: linear-gradient(145deg, rgba(16,18,27,.9), rgba(11,13,19,.92)) !important; }
+app-explore .people article:hover { border-color: rgba(139,92,246,.22) !important; transform: translateY(-2px); box-shadow: 0 16px 45px rgba(0,0,0,.18); }
+app-explore .people .avatar, app-right-sidebar .person .avatar { overflow: hidden; padding: 0 !important; }
+app-explore .people .avatar img, app-right-sidebar .person .avatar img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+app-post-card .avatar.profile-button,
+app-messages .avatar,
+app-status-list .story-owner-avatar,
+app-status-list .viewer-avatar { overflow: hidden; }
+app-post-card .avatar.profile-button img,
+app-messages .avatar img,
+app-status-list .story-owner-avatar img,
+app-status-list .viewer-avatar img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+app-profile .profile-header { padding: 7px 4px 29px !important; gap: 22px !important; }
+app-profile .profile-header img, app-profile .avatar { width: 94px !important; height: 94px !important; border: 3px solid #11131a; box-shadow: 0 0 0 2px var(--violet), 0 16px 40px rgba(139,92,246,.22); }
+app-profile .stats { margin-top: 15px; padding: 12px 0; gap: 25px !important; }
+app-profile .edit { padding: 22px !important; border-radius: 19px !important; background: var(--panel) !important; }
+app-profile .edit input, app-profile .edit textarea { border-radius: 12px !important; background: rgba(255,255,255,.03) !important; }
+
+/* Messages */
+app-messages .messages-page { grid-template-columns: 238px 1fr !important; background: rgba(7,8,12,.45); }
+app-messages aside { background: rgba(10,12,18,.68); }
+app-messages .conversation { min-height: 64px; padding: 13px 15px !important; border-color: rgba(255,255,255,.045) !important; }
+app-messages .conversation:hover { background: rgba(255,255,255,.035) !important; }
+app-messages .conversation.selected { background: linear-gradient(90deg,rgba(139,92,246,.16),rgba(139,92,246,.025)) !important; box-shadow: inset 3px 0 var(--violet); }
+app-messages .thread { padding: 24px !important; background: radial-gradient(circle at 80% 10%, rgba(139,92,246,.05), transparent 35%); }
+app-messages .bubble { padding: 10px 14px !important; border: 1px solid var(--stroke); border-radius: 16px 16px 16px 5px !important; background: #171a24 !important; }
+app-messages .bubble.mine { border: 0; border-radius: 16px 16px 5px 16px !important; background: linear-gradient(135deg,#7c3aed,#5b21b6) !important; box-shadow: 0 8px 24px rgba(109,40,217,.2); }
+app-messages form { padding: 17px !important; background: rgba(9,10,15,.9); }
+app-messages form input { height: 45px; padding: 0 15px !important; border-radius: 14px !important; }
+app-messages .mobile-back { display: none; }
+app-messages .chat-header { min-height: 65px; display: flex; align-items: center; gap: 11px; }
+app-messages .chat-person { min-width: 0; display: flex; align-items: center; gap: 10px; }
+app-messages .chat-avatar { width: 36px; height: 36px; display: grid; place-items: center; overflow: hidden; flex: none; border-radius: 50%; background: linear-gradient(135deg,#6366f1,#8b5cf6); font-size: 12px; }
+app-messages .chat-avatar img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+/* Right rail and notifications */
+app-right-sidebar .right-sidebar { padding: 27px 21px !important; background: rgba(7,8,13,.72) !important; }
+app-right-sidebar .search { height: 47px !important; border-radius: 15px !important; }
+app-right-sidebar .card { margin-top: 18px !important; padding: 19px !important; border-radius: 19px !important; background: rgba(14,16,23,.74) !important; box-shadow: 0 16px 45px rgba(0,0,0,.12); }
+app-notifications .bell { border-color: var(--stroke-strong) !important; background: rgba(17,19,28,.9) !important; box-shadow: 0 10px 35px rgba(0,0,0,.28); backdrop-filter: blur(18px); }
+app-notifications .bell:hover { border-color: rgba(139,92,246,.38) !important; color: var(--violet-bright) !important; transform: translateY(-2px); }
+app-notifications .bell { width: 42px !important; height: 42px !important; padding: 0 !important; display: grid !important; place-items: center; }
+app-notifications .bell svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+app-notifications .panel { border-radius: 21px !important; background: rgba(12,14,21,.94) !important; backdrop-filter: blur(28px); }
+app-notifications article:hover { background: rgba(255,255,255,.025); }
+app-notifications .action-error { margin: 10px 14px; padding: 9px 10px; border: 1px solid rgba(251,113,133,.2); border-radius: 9px; color: #fecdd3; background: rgba(244,63,94,.09); font-size: 9px; }
+app-notifications .bell { overflow: visible !important; }
+app-notifications .bell::after { display: none !important; }
+app-notifications .avatar { overflow: hidden; }
+app-notifications .avatar img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+app-notifications .panel-close { width: 34px; height: 34px; padding: 0 !important; display: grid; place-items: center; border: 1px solid var(--stroke) !important; border-radius: 10px; }
+app-notifications .panel-close svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+/* Consistent action geometry */
+.primary, .post-button, .share-button, .submit-button,
+.follow, .follow-back, .accept, .logout, .remove-photo,
+app-explore .search button, app-explore .people article > button:not(.profile-link),
+app-messages form button, app-post-card .comments form button {
+  min-height: 42px;
+  padding: 0 16px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px !important;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+}
+app-explore .people article > button:not(.profile-link) { min-width: 92px; }
+app-notifications .request button, app-notifications .follow-back { min-height: 36px; padding: 0 13px !important; border-radius: 10px !important; }
+app-profile .photo-picker, app-profile .remove-photo { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+
+app-sidebar .icon svg {
+  width: 21px; height: 21px; display: block; fill: none; stroke: currentColor;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Auth refinement */
+app-login .auth-page, app-register .register-page { background: var(--canvas) !important; }
+app-login .form-panel, app-register .form-panel { background: radial-gradient(circle at 100% 0, rgba(139,92,246,.1), transparent 35%), var(--canvas) !important; }
+app-login input, app-register input { border-radius: 14px !important; }
+
+app-profile .photo-editor { display: flex; align-items: center; gap: 15px; margin: 16px 0 20px; }
+app-profile .photo-editor img, app-profile .photo-editor > span { width: 68px; height: 68px; display: grid; place-items: center; object-fit: cover; border: 2px solid #151824; border-radius: 50%; background: linear-gradient(135deg,#6366f1,#8b5cf6); box-shadow: 0 0 0 2px rgba(139,92,246,.55); font-weight: 700; }
+app-profile .photo-picker { margin: 0 !important; padding: 11px 15px; border: 1px solid rgba(139,92,246,.28); border-radius: 11px; color: #c4b5fd !important; background: rgba(139,92,246,.09); cursor: pointer; }
+app-profile .photo-picker:hover { color: white !important; background: rgba(139,92,246,.16); transform: translateY(-1px); }
+app-profile .photo-picker input { display: none; }
+app-profile .photo-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+app-profile .remove-photo { padding: 10px 14px; border: 1px solid rgba(251,113,133,.22); border-radius: 11px; color: #fda4af; background: rgba(244,63,94,.07); cursor: pointer; }
+app-profile .remove-photo:hover { border-color: rgba(251,113,133,.4); background: rgba(244,63,94,.13); }
+
+/* Responsive */
+@media (max-width: 1150px) {
+  app-app-layout .app-shell { grid-template-columns: 230px minmax(0,680px) !important; }
+}
+
+@media (max-width: 760px) {
+  body::before { opacity: .12; }
+  app-app-layout .main-content { background: transparent; backdrop-filter: none; }
+  app-feed .mobile-header { height: 64px !important; padding: 0 17px !important; background: rgba(6,7,11,.83) !important; }
+  app-feed .stories-section { padding: 17px 14px !important; }
+  app-feed .composer { margin: 13px 11px 4px !important; padding: 15px !important; border-radius: 17px !important; }
+  app-feed .file-fields { display: grid !important; grid-template-columns: repeat(3, 1fr); }
+  app-feed .file-fields label { display: grid; place-items: center; min-height: 40px; padding: 6px !important; text-align: center; }
+  app-feed .feed-filter { padding: 0 15px !important; }
+  app-post-card .post-card { margin: 12px 10px !important; padding: 15px !important; border-radius: 17px !important; }
+  app-post-card .post-card:hover { transform: none; }
+  app-post-card .post-image { border-radius: 13px !important; }
+  app-explore .page, app-profile .page { padding: 19px 14px 90px !important; }
+  app-profile .profile-header { gap: 15px !important; }
+  app-profile .profile-header img, app-profile .avatar { width: 72px !important; height: 72px !important; }
+  app-profile .stats { width: 100%; justify-content: space-between; gap: 8px !important; }
+  app-messages .messages-page { display: block; height: calc(100dvh - 68px - env(safe-area-inset-bottom)); min-height: 0; overflow: hidden; }
+  app-messages .messages-page aside { width: 100%; height: 100%; display: block; overflow-y: auto; border-right: 0; }
+  app-messages .messages-page main { width: 100%; height: 100%; display: none; }
+  app-messages .messages-page.chat-open aside { display: none; }
+  app-messages .messages-page.chat-open main { display: flex; }
+  app-messages .conversation { min-height: 74px; padding: 12px 17px !important; }
+  app-messages .conversation .avatar { width: 48px; height: 48px; flex: none; }
+  app-messages .conversation small { display: block; }
+  app-messages .chat-header { min-height: 64px; padding: 10px 68px 10px 12px !important; }
+  app-messages .mobile-back { width: 42px; height: 42px; padding: 0 !important; display: grid; place-items: center; flex: none; border: 1px solid var(--stroke-strong); border-radius: 13px; color: var(--ink); background: rgba(255,255,255,.035); }
+  app-messages .mobile-back svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  app-messages .mobile-back::after { display: none; }
+  app-messages .chat-person strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  app-messages .thread { padding: 15px !important; }
+  app-messages form { padding: 11px !important; }
+  app-mobile-nav .mobile-nav { height: calc(68px + env(safe-area-inset-bottom)) !important; padding: 0 14px env(safe-area-inset-bottom) !important; border-top-color: var(--stroke-strong) !important; background: rgba(8,9,14,.94) !important; box-shadow: 0 -14px 45px rgba(0,0,0,.28); backdrop-filter: blur(24px); }
+  app-mobile-nav .mobile-nav a, app-mobile-nav .mobile-nav .create { width: 46px; height: 46px; padding: 0 !important; display: grid; place-items: center; border: 1px solid transparent; border-radius: 14px; }
+  app-mobile-nav .mobile-nav a svg, app-mobile-nav .mobile-nav .create svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  app-mobile-nav .mobile-nav a.active { color: #c4b5fd; border-color: rgba(139,92,246,.22); background: rgba(139,92,246,.11); box-shadow: 0 8px 22px rgba(109,40,217,.12); }
+  app-mobile-nav .mobile-nav .create { color: white; border-radius: 15px; background: linear-gradient(135deg,#8b5cf6,#6d28d9); box-shadow: 0 10px 26px rgba(109,40,217,.35); }
+  app-mobile-nav .message-link { overflow: visible; }
+  app-mobile-nav .message-link::after, app-mobile-nav .create::after { display: none; }
+  app-mobile-nav .message-link b { top: -2px; right: -3px; min-width: 19px; height: 19px; padding: 0 4px; border: 2px solid #08090e; font-size: 8px; }
+  app-notifications .notifications { top: 11px; right: 14px; }
+  app-notifications .bell { width: 44px !important; height: 44px !important; border-radius: 14px !important; background: rgba(14,16,24,.92) !important; }
+  app-notifications .bell > span { top: -5px; right: -5px; min-width: 20px; height: 20px; }
+  app-notifications .panel { position: fixed; top: 64px; right: 10px; left: 10px; width: auto; max-height: calc(100dvh - 148px); border-radius: 18px !important; }
+  app-notifications .list { max-height: calc(100dvh - 215px); }
+  app-notifications article { padding: 14px; }
+  app-notifications .request { margin-left: 47px; }
+  app-feed .file-fields label { min-height: 46px; border-radius: 12px !important; font-size: 10px; }
+  app-post-card .post-card header { flex-wrap: wrap; }
+  app-post-card .identity { min-width: 0; }
+  app-post-card .danger, app-post-card .follow { min-height: 38px; padding: 0 12px !important; }
+  app-explore .people article > button:not(.profile-link) { flex: 1; min-width: 100px; }
+  app-status-list .story-viewer { border-radius: 0 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* ================================================================
+   UNIVERSAL BUTTON INTERACTION SYSTEM
+================================================================ */
+button,
+[role='button'],
+.create-button,
+.photo-picker,
+.file-fields label,
+.story-file-fields label {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition:
+    transform .22s cubic-bezier(.2,.8,.2,1),
+    color .2s ease,
+    border-color .2s ease,
+    background-color .2s ease,
+    box-shadow .25s ease,
+    filter .2s ease !important;
+}
+
+button::after,
+[role='button']::after,
+.create-button::after,
+.photo-picker::after,
+.file-fields label::after,
+.story-file-fields label::after {
+  position: absolute;
+  z-index: -1;
+  top: -70%;
+  left: -45%;
+  width: 35%;
+  height: 240%;
+  opacity: 0;
+  pointer-events: none;
+  content: '';
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+  transform: rotate(20deg) translateX(-160%);
+  transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .25s ease;
+}
+
+button:hover:not(:disabled),
+[role='button']:hover,
+.create-button:hover,
+.photo-picker:hover,
+.file-fields label:hover,
+.story-file-fields label:hover {
+  border-color: rgba(167,139,250,.42) !important;
+  color: #fff !important;
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.22), 0 0 0 1px rgba(139,92,246,.06);
+}
+
+button:hover:not(:disabled)::after,
+[role='button']:hover::after,
+.create-button:hover::after,
+.photo-picker:hover::after,
+.file-fields label:hover::after,
+.story-file-fields label:hover::after {
+  opacity: 1;
+  transform: rotate(20deg) translateX(520%);
+}
+
+button:active:not(:disabled),
+[role='button']:active,
+.create-button:active,
+.photo-picker:active,
+.file-fields label:active,
+.story-file-fields label:active {
+  filter: brightness(.96);
+  transform: translateY(0) scale(.975);
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  transition-duration: .08s !important;
+}
+
+button:disabled,
+[aria-disabled='true'] {
+  opacity: .48 !important;
+  cursor: not-allowed !important;
+  filter: grayscale(.15);
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+button:disabled::after,
+[aria-disabled='true']::after { display: none; }
+
+/* Primary actions receive a soft colored aura. */
+.primary:hover:not(:disabled),
+.post-button:hover:not(:disabled),
+.share-button:hover:not(:disabled),
+.submit-button:hover:not(:disabled),
+.create-button:hover:not(:disabled),
+.accept:hover:not(:disabled) {
+  box-shadow: 0 13px 34px rgba(109,40,217,.36), 0 0 22px rgba(139,92,246,.1) !important;
+}
+
+/* Destructive actions glow red instead of violet. */
+.danger:hover:not(:disabled),
+.logout:hover:not(:disabled),
+.remove-photo:hover:not(:disabled),
+.delete-story:hover:not(:disabled) {
+  border-color: rgba(251,113,133,.45) !important;
+  color: #ffe4e6 !important;
+  background: rgba(244,63,94,.13) !important;
+  box-shadow: 0 10px 28px rgba(244,63,94,.13) !important;
+}
+
+/* Circular/icon controls should remain centered and not drift sideways. */
+.bell:hover:not(:disabled),
+.close-button:hover:not(:disabled),
+.close-story:hover:not(:disabled),
+.password-toggle:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.045);
+}
+
+@media (hover: none) {
+  button:hover:not(:disabled),
+  [role='button']:hover,
+  .create-button:hover,
+  .photo-picker:hover,
+  .file-fields label:hover,
+  .story-file-fields label:hover {
+    filter: none;
+    transform: none;
+    box-shadow: none;
+  }
+  button::after,
+  [role='button']::after,
+  .create-button::after,
+  .photo-picker::after,
+  .file-fields label::after,
+  .story-file-fields label::after { display: none; }
+}

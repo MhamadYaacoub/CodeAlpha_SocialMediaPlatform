@@ -1,0 +1,23 @@
+<div class="feed">
+  <header class="feed-header"><div><h1>Home</h1><span>See what's happening today</span></div></header>
+  <section class="stories-section"><app-status-list /></section>
+  <section class="composer" id="create-post">
+    <div class="composer-top"><div class="current-avatar">{{ initial() }}</div><textarea class="composer-input" [(ngModel)]="postContent" maxlength="2000" placeholder="What's happening?"></textarea></div>
+    <div class="file-fields">
+      <label>📷 Open camera<input type="file" accept="image/*,video/*" capture="environment" (change)="uploadMedia($event)"></label>
+      <label>🖼 Gallery<input type="file" accept="image/*,video/*" (change)="uploadMedia($event)"></label>
+      <label>♫ Music<input type="file" accept="audio/*" (change)="uploadMusic($event)"></label>
+      @if (uploading()) { <span>Uploading...</span> }
+    </div>
+    @if (mediaUrl) { <div class="attachment-ready">{{ mediaType === 'video' ? 'Video' : 'Photo' }} ready</div> }
+    @if (musicUrl) { <div class="attachment-ready">♫ {{ musicTitle }} ready</div> }
+    @if (error()) { <p class="form-error">{{ error() }}</p> }
+    <div class="composer-bottom"><span>{{ postContent.length }}/2000</span><button class="post-button" (click)="createPost()" [disabled]="posting()||uploading()">{{ posting() ? 'Posting…' : 'Post' }}</button></div>
+  </section>
+  <div class="feed-filter"><button class="active">Latest posts</button></div>
+  <section class="posts">
+    @if (loading()) { <p class="state">Loading posts…</p> }
+    @for (post of posts(); track post.id) { <app-post-card [post]="post" (changed)="loadPosts()" /> }
+    @if (!loading() && posts().length === 0) { <p class="state">No posts yet. Share the first one.</p> }
+  </section>
+</div>

@@ -1,0 +1,245 @@
+<div class="register-page">
+
+  <section class="brand-panel">
+
+    <div class="brand">
+      <div class="brand-mark">
+        S
+      </div>
+
+      <span>Socially</span>
+    </div>
+
+    <div class="brand-content">
+
+      <span class="eyebrow">
+        Join the community
+      </span>
+
+      <h1>
+        Share your world.
+        <span>Find your people.</span>
+      </h1>
+
+      <p>
+        Create your profile, share moments, follow people
+        you care about and start meaningful conversations.
+      </p>
+
+      <div class="feature-list">
+
+        <div class="feature">
+          <div class="feature-icon">
+            01
+          </div>
+
+          <div>
+            <strong>Share your moments</strong>
+
+            <span>
+              Post updates and stories with your community.
+            </span>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">
+            02
+          </div>
+
+          <div>
+            <strong>Discover people</strong>
+
+            <span>
+              Follow new people and build your network.
+            </span>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">
+            03
+          </div>
+
+          <div>
+            <strong>Chat in real time</strong>
+
+            <span>
+              Stay connected through private conversations.
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="form-panel">
+
+    <div class="form-wrapper">
+
+      <div class="form-header">
+
+        <span class="welcome-label">
+          Get started
+        </span>
+
+        <h2>Create your account</h2>
+
+        <p>
+          Join Socially and start connecting today.
+        </p>
+
+      </div>
+
+      @if (errorMessage()) {
+        <div class="error-alert">
+          <span>!</span>
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form
+        (ngSubmit)="register()"
+        #registerForm="ngForm"
+      >
+
+        <div class="two-column">
+
+          <div class="field">
+
+            <label for="name">
+              Full name
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              name="name"
+              [(ngModel)]="name"
+              placeholder="Mohamad Yaacoub"
+              autocomplete="name"
+              required
+            />
+
+          </div>
+
+          <div class="field">
+
+            <label for="username">
+              Username
+            </label>
+
+            <input
+              id="username"
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              placeholder="mohamad"
+              autocomplete="username"
+              required
+            />
+
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label for="email">
+            Email address
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+
+        </div>
+
+        <div class="field">
+
+          <label for="password">
+            Password
+          </label>
+
+          <div class="password-wrapper">
+
+            <input
+              id="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="Minimum 8 characters"
+              autocomplete="new-password"
+              required
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+            >
+              {{ showPassword() ? 'Hide' : 'Show' }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label for="confirmPassword">
+            Confirm password
+          </label>
+
+          <input
+            id="confirmPassword"
+            [type]="showPassword() ? 'text' : 'password'"
+            name="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            placeholder="Repeat your password"
+            autocomplete="new-password"
+            required
+          />
+
+        </div>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="loading()"
+        >
+
+          @if (loading()) {
+            <span class="spinner"></span>
+            Creating account...
+          } @else {
+            Create account
+            <span>→</span>
+          }
+
+        </button>
+
+      </form>
+
+      <p class="signin-text">
+        Already have an account?
+
+        <a routerLink="/login">
+          Sign in
+        </a>
+      </p>
+
+    </div>
+
+  </section>
+
+</div>

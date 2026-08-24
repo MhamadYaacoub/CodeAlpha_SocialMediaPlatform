@@ -1,0 +1,224 @@
+<div class="auth-page">
+
+  <section class="visual-panel">
+
+    <div class="brand">
+      <div class="brand-mark">
+        S
+      </div>
+
+      <span>Socially</span>
+    </div>
+
+    <div class="visual-content">
+
+      <div class="eyebrow">
+        Connect. Share. Discover.
+      </div>
+
+      <h1>
+        Your world,
+        <span>closer than ever.</span>
+      </h1>
+
+      <p>
+        Share moments, connect with people you care about,
+        discover new communities, and have real conversations.
+      </p>
+
+      <div class="preview-stack">
+
+        <div class="preview-card preview-card-primary">
+          <div class="preview-user">
+            <div class="preview-avatar">M</div>
+
+            <div>
+              <strong>Mohamad</strong>
+              <span>Just now</span>
+            </div>
+          </div>
+
+          <div class="preview-image">
+            <div class="image-glow"></div>
+          </div>
+
+          <div class="preview-actions">
+            <span>♡ 2.4K</span>
+            <span>◯ 186</span>
+            <span>↗ Share</span>
+          </div>
+        </div>
+
+        <div class="floating-profile">
+          <div class="floating-avatar">A</div>
+
+          <div>
+            <strong>New connections</strong>
+            <span>People you'll love to follow</span>
+          </div>
+        </div>
+
+        <div class="floating-message">
+          <div class="message-dot"></div>
+
+          <div>
+            <strong>New message</strong>
+            <span>Hey! How are you?</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="visual-footer">
+      Built for meaningful connections.
+    </div>
+
+  </section>
+
+  <section class="form-panel">
+
+    <div class="mobile-brand">
+      <div class="brand-mark">S</div>
+      <span>Socially</span>
+    </div>
+
+    <div class="form-wrapper">
+
+      <div class="form-header">
+        <span class="welcome-label">
+          Welcome back
+        </span>
+
+        <h2>Sign in to your account</h2>
+
+        <p>
+          Continue connecting with your community.
+        </p>
+      </div>
+
+      @if (errorMessage()) {
+        <div class="error-alert">
+          <span>!</span>
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form
+        (ngSubmit)="login()"
+        #loginForm="ngForm"
+      >
+
+        <div class="field">
+
+          <label for="email">
+            Email address
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              @
+            </span>
+
+            <input
+              id="email"
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <div class="label-row">
+            <label for="password">
+              Password
+            </label>
+
+            <button
+              type="button"
+              class="forgot-link"
+            >
+              Forgot password?
+            </button>
+          </div>
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              •
+            </span>
+
+            <input
+              id="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+            >
+              {{ showPassword() ? 'Hide' : 'Show' }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="loading()"
+        >
+
+          @if (loading()) {
+            <span class="spinner"></span>
+            Signing in...
+          } @else {
+            Sign in
+            <span class="arrow">→</span>
+          }
+
+        </button>
+
+      </form>
+
+      <div class="divider">
+        <span></span>
+        <p>New here?</p>
+        <span></span>
+      </div>
+
+      <a
+        routerLink="/register"
+        class="create-account"
+      >
+        Create a new account
+      </a>
+
+      <p class="terms">
+        By continuing, you agree to our
+        <a href="#">Terms</a>
+        and
+        <a href="#">Privacy Policy</a>.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
