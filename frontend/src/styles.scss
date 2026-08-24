@@ -168,7 +168,42 @@ app-post-card .post-card {
   box-shadow: 0 16px 55px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.025);
 }
 app-post-card .post-card:hover { border-color: rgba(255,255,255,.115) !important; box-shadow: 0 22px 70px rgba(0,0,0,.25); transform: translateY(-1px); }
-app-post-card .avatar { width: 43px !important; height: 43px !important; box-shadow: 0 6px 18px rgba(99,102,241,.22); }
+app-post-card .avatar.profile-button {
+  position: relative;
+  width: 46px !important;
+  min-width: 46px !important;
+  max-width: 46px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  max-height: 46px !important;
+  flex: 0 0 46px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 2px solid #151824 !important;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  background: linear-gradient(135deg,#6366f1,#8b5cf6) !important;
+  box-shadow: 0 0 0 1.5px rgba(139,92,246,.82), 0 8px 22px rgba(99,102,241,.2);
+}
+app-post-card .avatar.profile-button::after { display: none !important; }
+app-post-card .avatar.profile-button img {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  display: block;
+  border: 0 !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+app-post-card .post-card>header .identity { min-width: 0; }
+app-post-card .post-card>header .identity strong,
+app-post-card .post-card>header .identity span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 app-post-card .content { margin: 17px 0 !important; font-size: 13px !important; line-height: 1.7 !important; }
 app-post-card .post-image { max-height: 600px !important; border: 1px solid rgba(255,255,255,.06); border-radius: 17px !important; background: #050609; }
 app-post-card .actions { gap: 8px !important; margin-top: 15px !important; padding-top: 14px !important; }
