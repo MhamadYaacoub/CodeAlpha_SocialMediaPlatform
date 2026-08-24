@@ -7,11 +7,12 @@ import { Auth } from '../../../core/services/auth';
 import { Upload } from '../../../core/services/upload';
 import { EmojiPicker } from '../../../shared/components/emoji-picker/emoji-picker';
 import { LanguageService } from '../../../core/services/language';
+import { Notifications } from '../../../layout/notifications/notifications';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [StatusList, PostCard, FormsModule, EmojiPicker],
+  imports: [StatusList, PostCard, FormsModule, EmojiPicker, Notifications],
   templateUrl: './feed.html',
   styleUrl: './feed.scss',
 })

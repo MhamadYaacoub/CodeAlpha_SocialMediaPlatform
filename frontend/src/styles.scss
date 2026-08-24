@@ -199,6 +199,16 @@ app-messages .avatar img,
 app-status-list .story-owner-avatar img,
 app-status-list .viewer-avatar img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
 app-profile .profile-header { padding: 7px 4px 29px !important; gap: 22px !important; }
+app-profile .profile-header { position: relative; }
+app-profile .profile-menu { position: relative; margin-left: auto; align-self: flex-start; }
+app-profile .menu-trigger { width: 42px; height: 42px; padding: 0 !important; display: grid; place-items: center; overflow: visible; border: 1px solid transparent; border-radius: 13px; color: var(--ink-soft); background: transparent; }
+app-profile .menu-trigger svg { width: 22px; height: 22px; fill: currentColor; }
+app-profile .menu-trigger::after { display: none; }
+app-profile .menu-popover { position: absolute; z-index: 200; top: 48px; right: 0; width: 238px; padding: 7px; border: 1px solid var(--stroke-strong); border-radius: 15px; background: rgba(15,17,25,.98); box-shadow: 0 24px 70px rgba(0,0,0,.55); backdrop-filter: blur(20px); }
+app-profile .menu-popover button { width: 100%; min-height: 58px; padding: 10px !important; display: flex; align-items: center; gap: 11px; border: 0; border-radius: 11px; color: var(--ink); background: transparent; text-align: left; }
+app-profile .menu-popover button svg { width: 21px; height: 21px; flex: none; fill: none; stroke: var(--violet-bright); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+app-profile .menu-popover button span { display: flex; flex-direction: column; gap: 3px; }
+app-profile .menu-popover small { color: var(--ink-muted); font-size: 9px; }
 app-profile .profile-header img, app-profile .avatar { width: 94px !important; height: 94px !important; border: 3px solid #11131a; box-shadow: 0 0 0 2px var(--violet), 0 16px 40px rgba(139,92,246,.22); }
 app-profile .stats { margin-top: 15px; padding: 12px 0; gap: 25px !important; }
 app-profile .edit { padding: 22px !important; border-radius: 19px !important; background: var(--panel) !important; }
@@ -232,6 +242,8 @@ app-notifications .bell svg { width: 20px; height: 20px; fill: none; stroke: cur
 app-notifications .panel { border-radius: 21px !important; background: rgba(12,14,21,.94) !important; backdrop-filter: blur(28px); }
 app-notifications article:hover { background: rgba(255,255,255,.025); }
 app-notifications .action-error { margin: 10px 14px; padding: 9px 10px; border: 1px solid rgba(251,113,133,.2); border-radius: 9px; color: #fecdd3; background: rgba(244,63,94,.09); font-size: 9px; }
+app-feed .feed-header { position: relative; }
+app-feed app-notifications .notifications { position: absolute; top: 22px; right: 22px; }
 app-notifications .bell { overflow: visible !important; }
 app-notifications .bell::after { display: none !important; }
 app-notifications .avatar { overflow: hidden; }
@@ -299,6 +311,9 @@ app-profile .remove-photo:hover { border-color: rgba(251,113,133,.4); background
   app-profile .profile-header { gap: 15px !important; }
   app-profile .profile-header img, app-profile .avatar { width: 72px !important; height: 72px !important; }
   app-profile .stats { width: 100%; justify-content: space-between; gap: 8px !important; }
+  app-profile .profile-menu { position: absolute; top: 0; right: 0; }
+  app-profile .menu-popover { position: fixed; top: 72px; right: 12px; left: 12px; width: auto; }
+  app-feed app-notifications .notifications { position: absolute; top: 10px; right: 14px; }
   app-messages .messages-page { display: block; height: calc(100dvh - 68px - env(safe-area-inset-bottom)); min-height: 0; overflow: hidden; }
   app-messages .messages-page aside { width: 100%; height: 100%; display: block; overflow-y: auto; border-right: 0; }
   app-messages .messages-page main { width: 100%; height: 100%; display: none; }

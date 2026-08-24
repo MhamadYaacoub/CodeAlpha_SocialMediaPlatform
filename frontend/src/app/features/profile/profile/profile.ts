@@ -9,6 +9,7 @@ import { Upload } from '../../../core/services/upload';
 @Component({selector:'app-profile',standalone:true,imports:[FormsModule,PostCard],templateUrl:'./profile.html',styleUrl:'./profile.scss'})
 export class Profile implements OnInit {
   profile=signal<any>(null);loading=signal(true);saving=signal(false);uploading=signal(false);message=signal('');connections=signal<any[]>([]);connectionTitle=signal('');name='';bio='';profileImage='';
+  menuOpen=signal(false);
   readonly currentUser:ReturnType<Auth['getCurrentUser']>;
   constructor(private service:User,private auth:Auth,private router:Router,private route:ActivatedRoute,private upload:Upload){this.currentUser=auth.getCurrentUser();}
   ngOnInit():void{this.route.paramMap.subscribe(params=>{const routeId=params.get('id');if(routeId){this.load(Number(routeId));return;}this.service.me().subscribe({next:({user})=>{this.auth.updateCurrentUser(user);this.load(user.id);},error:()=>{this.message.set('Unable to load your profile. Please sign in again.');this.loading.set(false);}});});}
@@ -21,4 +22,5 @@ export class Profile implements OnInit {
   logout():void{this.auth.logout();this.router.navigate(['/login']);}
   uploadProfileImage(event:Event):void{const input=event.target as HTMLInputElement;const file=input.files?.[0];if(!file)return;if(!file.type.startsWith('image/')){this.message.set('Please choose an image file.');return;}this.uploading.set(true);this.message.set('');this.upload.file(file).subscribe({next:({url})=>{this.profileImage=url;this.uploading.set(false);this.message.set('Photo uploaded. Save changes to apply it.');},error:e=>{this.uploading.set(false);this.message.set(e?.error?.message||'Unable to upload profile photo.');}});input.value='';}
   removeProfileImage():void{this.profileImage='';this.message.set('Photo removed. Save changes to apply it.');}
+  openSettings():void{this.menuOpen.set(false);this.router.navigate(['/settings']);}
 }

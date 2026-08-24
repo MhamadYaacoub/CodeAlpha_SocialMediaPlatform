@@ -9,6 +9,7 @@ import { Feed } from './features/feed/feed/feed';
 import { Explore } from './features/explore/explore/explore';
 import { Profile } from './features/profile/profile/profile';
 import { Messages } from './features/messages/messages/messages';
+import { Settings } from './features/settings/settings';
 import { authGuard, guestGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -47,6 +48,10 @@ export const routes: Routes = [
       {
         path: 'profile/:id',
         component: Profile,
+      },
+      {
+        path: 'settings',
+        component: Settings,
       },
       {
         path: '',
