@@ -103,14 +103,16 @@ const startServer = async () => {
 
     console.log("PostgreSQL connected successfully.");
 
+    // Create the schema before running compatibility alterations. Fresh hosted
+    // databases do not have the posts/statuses tables yet.
+    await sequelize.sync();
+
     for (const table of ["posts", "statuses"]) {
       await sequelize.query(`ALTER TABLE ${table} ADD COLUMN IF NOT EXISTS "mediaUrl" VARCHAR(255)`);
       await sequelize.query(`ALTER TABLE ${table} ADD COLUMN IF NOT EXISTS "mediaType" VARCHAR(20)`);
       await sequelize.query(`ALTER TABLE ${table} ADD COLUMN IF NOT EXISTS "musicUrl" VARCHAR(255)`);
       await sequelize.query(`ALTER TABLE ${table} ADD COLUMN IF NOT EXISTS "musicTitle" VARCHAR(255)`);
     }
-
-    await sequelize.sync();
 
     console.log("Database tables synchronized.");
 
