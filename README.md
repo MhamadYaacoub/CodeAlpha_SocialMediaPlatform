@@ -5,6 +5,12 @@
 </p>
 
 <p align="center">
+  <a href="https://render.com/deploy?repo=https://github.com/MhamadYaacoub/CodeAlpha_SocialMediaPlatform">
+    <img alt="Deploy to Render" src="https://render.com/images/deploy-to-render-button.svg">
+  </a>
+</p>
+
+<p align="center">
   <img alt="Angular 21" src="https://img.shields.io/badge/Angular-21-DD0031?logo=angular">
   <img alt="Node.js 22" src="https://img.shields.io/badge/Node.js-22-339933?logo=node.js&logoColor=white">
   <img alt="Express 5" src="https://img.shields.io/badge/Express-5-111111?logo=express">
@@ -121,7 +127,7 @@ In production, Express serves the compiled Angular application and API from the 
 ### 1. Clone and install
 
 ~~~bash
-git clone <your-repository-url>
+git clone https://github.com/MhamadYaacoub/CodeAlpha_SocialMediaPlatform.git
 cd CodeAlpha_SocialMediaPlatform
 npm run install:all
 ~~~
